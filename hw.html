@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validator</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <style>
+
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .wrapper{
+            width: 500px;
+        }   
+
+
+        h2{
+            margin-bottom: 30px;
+        }
+
+        .btn{
+            width: 130px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <h2>Email Validator</h2>
+        </div>
+        <div class="row">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input id="yourEmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+          <button class="btn btn-primary" id="btnCheckEmail">Check Email</button>
+        </div>
+
+        <div class="row">
+          <div class="testFeedback"></div>
+        </div>
+
+    </div>
+</div>
+
+    
+</body>
+<script>
+
+        //1. "@" - should contain only 1
+        //2. a@a.co -- to the left of @ should be at least 1 character
+        //3. ...to the right of 2 should contain at least 1 character and 1 period(.)
+        //4. After  "." - should contain at least 1 character
+        //email (before $)
+        //mail provider (1character after @)
+        //domain (1 character after period)
+
+
+        function isValidEmail(inputEmail){
+        let email = inputEmail;
+
+        let beforeESplit = email.split("@");
+        //someemail
+        let beforeE = beforeESplit[0];
+
+        //email.com
+        let afterE = beforeESplit[1];
+
+        let afterPSplit = beforeESplit[1].split(".");
+
+        //email
+        let beforeP = afterPSplit[0];
+        //com
+        let afterP = afterPSplit[1];
+
+        // console.log(beforeE, beforeP, afterP)
+
+        //loop the email
+        for (let i = 0; i < email.length; i++){
+
+            //check email on @
+            if (email[i] !== "@"){
+                return false
+            } else {
+                console.log ("Success")
+                //check at least 1 char on the left from @
+                if (beforeE.trim().length <= 1){
+                console.log("There's an error")
+                return false
+            } else {
+                //loop the right from @
+                for (let i = 0; i < afterE.length; i++){
+                    // console.log(i, afterE.charAt(i))
+                    //check at least 1 char and . on the right from @
+                    if (afterE.trim().length <= 1 && afterE.charAt(i) !== "."){
+                        // console.log ("wrong")
+                        return false
+                    } else{
+                        //check at least 1 char after .
+                        if (beforeE.trim().length <= 1){
+                            return false
+                            // console.log("There's an error")
+                        } else {
+                            // console.log("success")
+
+                            //check if the mail provider + domain is valid
+                            if (afterE !== "gmail.com" || "yahoo.com" || "outlook.com"){
+                                return false
+                            } else{
+                                return true
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+            }
+        // }
+        }
+
+        $(document).ready(function(){
+
+
+
+            $("#btnCheckEmail").click(function(){
+                let userEmail = $("#yourEmail").val();
+                console.log(isValidEmail(userEmail))
+
+            //     let validEmail = isValidEmail(userEmail);
+
+            //     if (validEmail){
+                    
+            //         $(".testFeedback").html(`
+            //          <p>Congratulations! Your email is valid!</p>
+            //          `)
+            //     } else {
+            //         $("#yourEmail").keyup(function(){
+            //             $(this).addClass("is-invalid")
+            //         }
+            // )}
+
+            })
+
+
+
+        })
+        
+
+
+</script>
+</html>
