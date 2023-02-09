@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .wrapper{
+            width: 550px;
+            padding: 70px;
+            border: 1px solid rgb(185, 185, 185);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2{
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .btn{
+            margin-top: 20px;
+        }
+
+        .result{
+            margin-top: 40px;
+            max-width: 400px;
+        }
+
+        .output{
+            border: 1px solid rgb(185, 185, 185);
+            border-radius: 15px;
+            padding: 15px 30px;
+        }
+
+    </style>
+    
+    
+    <title>Word Reverser</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <h2>Word Reverser</h2>
+    <input id="wordInput" class="form-control" type="text" placeholder="Type the word" aria-label="default input example">
+    <button id="getWord" class="btn btn-primary">Reverse Word</button>
+    <button id="clearString" class="btn btn-danger">Clear All</button>
+            <div class="result">
+                <h5>Here's the result:</h5>
+                <div class="output"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    function wordReverse (word) {
+        // let letters = word.charAt(2)
+        // console.log (letters)
+
+
+        for (i = word.length-1; i >= 0; i--){
+            let neededResult = " ";
+            let result = word.charAt(i);
+            neededResult = neededResult.concat()
+            console.log ()
+        }
+
+    }
+
+    let neededResult = " ";
+
+    $(document).ready(function(){
+
+
+        //ISSUES WITH EMPTY STRING BEFORE APPENDING NEW WORDS!
+        $("#getWord").click(function(){
+            $('.output').empty()
+            let input = $("#wordInput").val();
+
+            // console.log(input, neededResult)
+            //split words if input contains more than two words => array => apply the reverser
+            for (i = input.length-1; i >= 0; i--){
+                let result = input.charAt(i);
+                // console.log(result)
+                neededResult = neededResult.concat(`<span>${result}</span>`).trim()
+                // console.log(neededResult)
+
+        }
+
+        $('.output').empty().append(`
+        ${neededResult}
+        `)
+    })
+
+    $("#clearString").click(function(){
+
+        $("#wordInput").empty()
+        $(".output").empty()
+
+    })
+
+
+
+    })
+</script>
+</html>
